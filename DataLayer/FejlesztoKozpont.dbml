@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FejlesztoKozpont" Class="FejlesztoKozpontDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\mssqllocaldb;Initial Catalog=FejlesztoKozpont;Integrated Security=True" SettingsObjectName="DataLayer.Properties.Settings" SettingsPropertyName="FejlesztoKozpontConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Gyerekek" Member="Gyerekeks">
+    <Type Name="Gyerekek">
+      <Column Name="GyerekID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BirthDay" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TerapeutaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Terapeutak_Gyerekek" Member="Terapeutak" ThisKey="TerapeutaID" OtherKey="TerapeutaID" Type="Terapeutak" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Terapeutak" Member="Terapeutaks">
+    <Type Name="Terapeutak">
+      <Column Name="TerapeutaID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Terapeutak_Gyerekek" Member="Gyerekeks" ThisKey="TerapeutaID" OtherKey="TerapeutaID" Type="Gyerekek" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AllGyerekData" Member="AllGyerekDatas">
+    <Type Name="AllGyerekData">
+      <Column Name="GyerekID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BirthDay" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TerapeutaName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TerapeutaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
