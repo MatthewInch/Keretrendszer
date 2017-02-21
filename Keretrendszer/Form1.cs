@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using CurrentTasks;
 using System.Reflection;
 using Keretrendszer.Base;
+using System.Globalization;
+using System.Threading;
+using System.Configuration;
 
 namespace Keretrendszer
 {
@@ -31,7 +34,10 @@ namespace Keretrendszer
 
         public Form1()
         {
+            var settings = Properties.Settings.Default;
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(settings.Language2);
             InitializeComponent();
+            txtOutput.AppendText(Properties.Resources.Test + "\n"); 
         }
 
         private void btnExecute_Click(object sender, EventArgs e)
@@ -184,6 +190,30 @@ namespace Keretrendszer
                     });
                 }
             }
+        }
+
+        private void englishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetLanguage("en");
+        }
+
+        private void SetLanguage(string language)
+        {
+            //var configManager = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            //configManager.AppSettings.Settings.Remove("Language");
+            //configManager.AppSettings.Settings.Add("Language", language);
+            //configManager.Save();
+            var settings = Properties.Settings.Default;
+            settings.Language2 = language;
+            settings.Save();
+            Application.Restart();
+
+
+        }
+
+        private void hungarianToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetLanguage("hu");
         }
     }
 }
